@@ -31,7 +31,7 @@ struct UsageView: View {
                 }
             }
             .padding()
-            .background(Color(NSColor.controlBackgroundColor))
+            .background(Color(NSColor.windowBackgroundColor))
             
             // Update available banner
             if let newVersion = manager.updateAvailable {
@@ -49,22 +49,6 @@ struct UsageView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 8)
             }
-
-            // Follow Me button
-            Button(action: {
-                openURL(URL(string: "https://x.com/richhickson")!)
-            }) {
-                HStack {
-                    Image(systemName: "person.badge.plus")
-                    Text("Follow Me on X")
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .padding(.horizontal)
-            .padding(.vertical, manager.updateAvailable == nil ? 8 : 0)
-            .padding(.bottom, 8)
-
             Divider()
 
             if let error = manager.error {
@@ -81,6 +65,7 @@ struct UsageView: View {
             footerView()
         }
         .frame(width: 280)
+        .background(Color(NSColor.windowBackgroundColor))
     }
     
     @ViewBuilder
@@ -94,7 +79,7 @@ struct UsageView: View {
                 resetsAt: usage.sessionResetsAt,
                 color: colorForPercentage(usage.sessionPercentage)
             )
-            
+
             // Weekly usage
             UsageRow(
                 title: "Weekly",
@@ -103,7 +88,7 @@ struct UsageView: View {
                 resetsAt: usage.weeklyResetsAt,
                 color: colorForPercentage(usage.weeklyPercentage)
             )
-            
+
             // Sonnet only (if available)
             if let sonnetPct = usage.sonnetPercentage {
                 UsageRow(
@@ -116,6 +101,7 @@ struct UsageView: View {
             }
         }
         .padding()
+        .background(Color(NSColor.windowBackgroundColor))
     }
     
     @ViewBuilder
@@ -163,8 +149,9 @@ struct UsageView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
+        .background(Color(NSColor.windowBackgroundColor))
     }
-    
+
     @ViewBuilder
     func loadingView() -> some View {
         VStack(spacing: 12) {
@@ -175,6 +162,7 @@ struct UsageView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
+        .background(Color(NSColor.windowBackgroundColor))
     }
     
     @ViewBuilder
@@ -244,7 +232,7 @@ struct UsageView: View {
             .padding(.horizontal)
             .padding(.bottom, 8)
         }
-        .background(Color(NSColor.controlBackgroundColor))
+        .background(Color(NSColor.windowBackgroundColor))
     }
     
     func colorForPercentage(_ pct: Int) -> Color {
@@ -298,9 +286,9 @@ struct UsageRow: View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
-                        .fill(Color(NSColor.separatorColor))
+                        .fill(Color(NSColor.quaternaryLabelColor))
                         .frame(height: 8)
-                    
+
                     RoundedRectangle(cornerRadius: 4)
                         .fill(color)
                         .frame(width: geometry.size.width * CGFloat(percentage) / 100, height: 8)

@@ -36,9 +36,9 @@ class UsageManager: ObservableObject {
     var statusEmoji: String {
         guard let usage = usage else { return "❓" }
         let maxUtil = max(usage.sessionUtilization, usage.weeklyUtilization)
-        if maxUtil >= 90 { return "🔴" }
-        if maxUtil >= 70 { return "🟡" }
-        return "🟢"
+        if maxUtil >= 90 { return "💀" }
+        if maxUtil >= 70 { return "🪫" }
+        return "🚀"
     }
 
     func refresh() async {
